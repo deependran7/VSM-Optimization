@@ -1,7 +1,7 @@
 # VSM-Optimization
 ## Diagram
-![Figure](General_Values.pdf)
+![Figure](Model.jpg)
 ## For General Values
-![Figure](map.jpg)
+![Figure](General_Values.jpg)
 ## For Optimal Values
-![Figure](map.jpg)
+![Figure](Optimal_Values.jpg)
