@@ -1,10 +1,9 @@
 import numpy as np
 pi = np.pi
-Vbase = 400/np.sqrt(3)
-Sbase = 1000
-Ibase = Sbase/Vbase
-Vbase = np.sqrt(2)*Vbase
-Ibase = np.sqrt(2)*Ibase
+Vnom = 400
+Pbase = 1000
+Vbase = Vnom*np.sqrt(2/3)
+Ibase = 2*(Pbase/Vbase) #vdid +vqiq = 2P
 Zbase = Vbase/Ibase
 
 #Inverter Variables(in pu)
@@ -16,16 +15,18 @@ Rc = 0.01
 Lc = 0.00125
 Vdc = np.sqrt(2)*100
 #Load Variables
-RLoad = 0.8*Zbase            #115.47
-XLoad = 0.6*Zbase            #153.96
-LLoad = XLoad/(w)
+PLoad = 800;
+QLoad = 600
+Inom = Pbase/(np.sqrt(3)*Vnom)
+RLoad = PLoad/(3*Inom**2)
+XLoad = QLoad/(3*Inom**2)
 
 T_inv = 0.0001
-K_inv = 1.2
+K_inv = 0.5
 
 
 Pref=1.0;
-Vref=1.4;
+Vref=1.0;
 X_optimal = [1.47527927e+00, 4.03544283e-01, 6.35738918e-02, 2.94491065e+00,
  5.82967049e-03, 1.73255221e-02, 5.71779349e+00, 9.79004084e-01,
  9.69122020e-01, 1.70774306e+00, 1.03728095e-04, 1.43135922e-04,
@@ -48,8 +49,8 @@ def Inverter_optimal(t,x):
     Ifq_dot = -w*Ifd + (-Rf/Lf)*Ifq + (Viq - Vcq)/Lf
     Vcd_dot = w*Vcq + (Ifd - Iod)/Cf
     Vcq_dot = -w*Vcd + (Ifq - Ioq)/Cf
-    Iod_dot = (-(Rc+RLoad)/(Lc+LLoad))*Iod + w*Ioq + (Vcd -Vod)/Lc
-    Ioq_dot = -w*Iod + (-(Rc+RLoad)/(Lc+LLoad))*Ioq + (Vcq -Voq)/Lc
+    Iod_dot = (-(Rc)/(Lc))*Iod + w*Ioq + (Vcd -Vod)/Lc
+    Ioq_dot = -w*Iod + (-(Rc)/(Lc))*Ioq + (Vcq -Voq)/Lc
 
     ##Machine Equations
     Eqd_dot = (-Eqd - (xd-xdd)*Iod/Ibase + Efd)/Td0 
