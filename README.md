@@ -5,5 +5,7 @@
 ![Figure](General_Values.jpg)
 ## For Optimal Values
 ![Figure](Optimal_Values.jpg)
-## for load sensitivity
+## Eigen Value Sensitivity
+![Figure](Sensitivity.jpg)
+## For Load Sensitivity
 ![Figure](load_sensitivity.png)
